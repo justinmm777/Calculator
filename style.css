@@ -3,3 +3,44 @@ html {
     height: 100vh;
     box-sizing: border-box;
 }
+
+#container{
+    border: 1px solid green;
+    padding: 10px;
+    width: 450px;
+}
+
+#calcBorder {
+    border: 1px solid blue;
+    padding: 10px;
+}
+
+#mainArea {
+    border: 1px solid rgb(255, 0, 221);
+    padding: 10px;
+}
+
+#calcDisplay {
+    border: 1px solid yellow;
+    padding: 25px;
+}
+
+.btnClearDelete {
+    border: 1px solid rgb(23, 129, 120);
+    padding: 10px;
+}
+
+#btnClear,
+#btnDelete {
+    padding: 10px 25px;
+    font-size: 25px;
+}
+
+.btnNumSymbols {
+    border: 1px solid red;
+    padding: 10px;
+}
+
+.btn {
+    padding: 10px 15px;
+}
