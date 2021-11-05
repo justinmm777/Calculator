@@ -1,46 +1,135 @@
 html {
-    border: 2px solid red;
     height: 100vh;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e0e0e0;
 }
 
 #container{
-    border: 1px solid green;
-    padding: 10px;
-    width: 450px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 550px;
+    border-radius: 23px;
+    background: #e0e0e0;
+    box-shadow:  9px 9px 12px #898989,
+                -9px -9px 12px #ffffff;
 }
 
 #calcBorder {
-    border: 1px solid blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 10px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #f0f0f0, #cacaca);
+    box-shadow:  9px 9px 12px #898989,
+                -9px -9px 12px #ffffff;
 }
 
 #mainArea {
-    border: 1px solid rgb(255, 0, 221);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     padding: 10px;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #f0f0f0, #cacaca);
+    box-shadow:  9px 9px 12px #898989,
+                -9px -9px 12px #ffffff;
 }
 
 #calcDisplay {
-    border: 1px solid yellow;
+    display: flex;
+    justify-content: right;
     padding: 25px;
+    margin-bottom: 5px;
+    font-size: 25px;
+    max-width: 300px;
+    flex-wrap: wrap;
+    overflow: auto;
+    border-radius: 12px;
+    background: #e0e0e0;
+    box-shadow: inset 9px 9px 12px #898989,
+                inset -9px -9px 12px #ffffff;
+
 }
 
 .btnClearDelete {
-    border: 1px solid rgb(23, 129, 120);
+    display: flex;
+    justify-content: space-around;
     padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+    background: linear-gradient(145deg, #cacaca, #f0f0f0);
+    box-shadow:  9px 9px 12px #898989,
+                -9px -9px 12px #ffffff;
 }
 
 #btnClear,
 #btnDelete {
     padding: 10px 25px;
     font-size: 25px;
+    border: none;
+}
+
+#btnClear {
+    border-radius: 32px;
+    background: #dd1d1d;
+}
+
+#btnClear:active {
+    border-radius: 50px;
+    background: #dd1d1d;
+    box-shadow: inset 34px 34px 68px #961414,
+                inset -34px -34px 68px #ff2626;
+}
+
+#btnDelete {
+    border-radius: 32px;
+    background: #73d216;
+}
+
+#btnDelete:active {
+    border-radius: 50px;
+    background: #73d216;
+    box-shadow: inset 22px 22px 44px #62b313,
+                inset -22px -22px 44px #84f219;
 }
 
 .btnNumSymbols {
-    border: 1px solid red;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     padding: 10px;
+    gap: 10px;
+    border-radius: 6px;
+    background: linear-gradient(145deg, #f0f0f0, #cacaca);
+    box-shadow:  9px 9px 12px #898989,
+                -9px -9px 12px #ffffff;
 }
 
-.btn {
-    padding: 10px 15px;
+.btnRow {
+    display: flex;
+    gap:10px;
 }
+
+
+.btn {
+    font-size: 25px;
+    height: 70px;
+    width: 70px;
+    border-radius: 50px;
+    background: linear-gradient(145deg, #f0f0f0, #cacaca);
+    box-shadow:  9px 9px 18px #bebebe,
+                -9px -9px 18px #ffffff;
+    border: none;
+}
+
+.btn:active {
+    box-shadow: 16px 16px 18px #aaaaaa inset,
+                -16px -16px 18px #ffffff inset;
+}
+
