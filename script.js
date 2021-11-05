@@ -1,3 +1,15 @@
+let num1;
+// function to populate display
+// Get the value of button clicked
+const clickedBtn = document.querySelectorAll('button').forEach(item => {
+    item.addEventListener('click', event => {
+        // console.log(item.value);
+        const liveDisplay = document.getElementById('liveDisplay');
+        num1 = liveDisplay.textContent += item.value;
+    })
+})
+
+
 
 // Operater function
 function operate(operator, a, b) {
@@ -32,6 +44,3 @@ function divide(a, b) {
     }
     return a / b;
 }
-
-
-console.log(operate("/", 8, 4));

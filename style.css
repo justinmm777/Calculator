@@ -7,33 +7,12 @@ html {
     background: #e0e0e0;
 }
 
-#container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 400px;
-    height: 550px;
-    border-radius: 23px;
-    background: #e0e0e0;
-    box-shadow:  9px 9px 12px #898989,
-                -9px -9px 12px #ffffff;
-}
-
-#calcBorder {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    border-radius: 12px;
-    background: linear-gradient(145deg, #f0f0f0, #cacaca);
-    box-shadow:  9px 9px 12px #898989,
-                -9px -9px 12px #ffffff;
-}
-
-#mainArea {
+#container {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    width: 350px;
+    height: 540px;
     padding: 10px;
     border-radius: 12px;
     background: linear-gradient(145deg, #f0f0f0, #cacaca);
@@ -43,18 +22,27 @@ html {
 
 #calcDisplay {
     display: flex;
-    justify-content: right;
-    padding: 25px;
-    margin-bottom: 5px;
-    font-size: 25px;
-    max-width: 300px;
-    flex-wrap: wrap;
-    overflow: auto;
-    border-radius: 12px;
+    flex-direction: column;
+    justify-content: center;
+    height: 100px;
+    padding: 5px;
+    border-radius: 10px;
     background: #e0e0e0;
-    box-shadow: inset 9px 9px 12px #898989,
-                inset -9px -9px 12px #ffffff;
+    box-shadow: inset 5px 5px 10px #5a5a5a,
+                inset -5px -5px 10px #ffffff;
+}
 
+#historyDisplay,
+#liveDisplay {
+    display: flex;
+    justify-content: right;
+    margin: 3px;
+    font-size: 25px;
+    overflow: hidden;
+}
+
+.displayRow {
+    display: flex;
 }
 
 .btnClearDelete {
@@ -116,8 +104,8 @@ html {
     gap:10px;
 }
 
-
-.btn {
+.btnOperator,
+.btnNum {
     font-size: 25px;
     height: 70px;
     width: 70px;
@@ -128,7 +116,8 @@ html {
     border: none;
 }
 
-.btn:active {
+.btnNum:active,
+.btnOperator:active {
     box-shadow: 16px 16px 18px #aaaaaa inset,
                 -16px -16px 18px #ffffff inset;
 }
