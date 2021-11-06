@@ -32,6 +32,14 @@ html {
                 inset -5px -5px 10px #ffffff;
 }
 
+#liveDisplay {
+    border: 1px solid green;
+}
+
+#historyDisplay {
+    border: 1px solid red;
+}
+
 #historyDisplay,
 #liveDisplay {
     display: flex;
