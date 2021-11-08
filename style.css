@@ -32,15 +32,31 @@ html {
                 inset -5px -5px 10px #ffffff;
 }
 
-#liveDisplay {
-    border: 1px solid green;
+#historyOperatorDiv {
+    display: flex;
+    justify-content: end;
 }
 
 #historyDisplay {
+    display: flex;
     border: 1px solid red;
+    width: 100%;
 }
 
+#operatorDisplay {
+    border: 1px solid blue;
+    width: 21px;
+    height: 30px;
+}
+
+#liveDisplay {
+    border: 1px solid green;
+    height: 30px;
+}
+
+
 #historyDisplay,
+#operatorDisplay,
 #liveDisplay {
     display: flex;
     justify-content: right;
@@ -113,6 +129,7 @@ html {
 }
 
 .btnOperator,
+.btnEqual,
 .btnNum {
     font-size: 25px;
     height: 70px;

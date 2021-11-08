@@ -1,20 +1,58 @@
 
 // store the first number that is input 
 // into the calculator when a user presses an operator
-const operators = document.querySelectorAll('.btnOperator').forEach(item => {
+const operators = document.querySelectorAll('button').forEach(item => {
     item.addEventListener('click', event => {
-        const operator = item.value;
-        const num1 = document.getElementById('liveDisplay').textContent;
-        const historyDisplay = document.getElementById('historyDisplay');
-        historyDisplay.textContent += `${num1} ${operator}`;
-        clearLiveDisplay();
-    } )
+        if (item.className == '.btnNum') {
+            const liveDisplay = document.getElementById('liveDisplay');
+            liveDisplay.textContent += item.value;
+
+        }
+
+
+
+        // const operator = item.value;
+        // console.log(operator);
+        // const operatorDisplay = document.getElementById('operatorDisplay');
+        // operatorDisplay.textContent = `${operator}`;
+        // const historyDisplay = document.getElementById('historyDisplay');
+        // historyDisplay.textContent = liveDisplay.textContent;
+      
+        // clearLiveDisplay();
+        
+        // console.log(num1);
+
+        // if (item.className == 'btnOperator') {
+
+        // }
+
+
+
+
+
+        // const num2 = parseInt(document.getElementById('liveDisplay').textContent);
+        // console.log(num2);
+        // const result = operate(operator, num1, num2);
+        // console.log(result);
+    })
 })
 
-
 // save which operation has been chosen
-
 // then operate() on them when the user presses the “=” key. 
+
+// const total = document.querySelector('.btnOperator').addEventListener('click', event => {
+//     const num1 = parseInt(document.getElementById('historyDisplay').textContent);
+//     const num2 = parseInt(document.getElementById('liveDisplay').textContent);
+//     const operator = document.getElementById('operatorDisplay').textContent;
+//     const result = operate(operator, num1, num2);
+//     clearLiveDisplay();
+//     console.log(result);
+//     const liveDisplay = document.getElementById('liveDisplay');
+//     liveDisplay.textContent = `${result}`
+    
+
+// })
+
 
 
 // function to clear the content of liveDisplay
@@ -22,15 +60,19 @@ function clearLiveDisplay() {
     document.getElementById('liveDisplay').textContent = '';
 }
 
+function clearHistoryDisplay() {
+    document.getElementById('historyDisplay').textContent = '';
+}
+
 // function to populate display
 // Get the value of button clicked
-const clickedBtn = document.querySelectorAll('.btnNum').forEach(item => {
-    item.addEventListener('click', event => {
-        // console.log(item.value);
-        const liveDisplay = document.getElementById('liveDisplay');
-        liveDisplay.textContent += item.value;
-    });
-});
+// const clickedBtn = document.querySelectorAll('.btnNum').forEach(item => {
+//     item.addEventListener('click', event => {
+//         // console.log(item.value);
+//         const liveDisplay = document.getElementById('liveDisplay');
+//         liveDisplay.textContent += item.value;
+//     });
+// });
 
 // Operater function
 function operate(operator, a, b) {
