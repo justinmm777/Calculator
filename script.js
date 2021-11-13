@@ -1,29 +1,35 @@
 
+const operatorDisplay = document.getElementById('operatorDisplay');
+const historyDisplay = document.getElementById('historyDisplay');
+const liveDisplay = document.getElementById('liveDisplay');
+const numbers = document.querySelectorAll('.btnNum');
+const equal = document.getElementById('btnEqual');
+const operators = document.querySelectorAll('.btnOperator');
+
 // store the first number that is input 
 // into the calculator when a user presses an operator
-document.querySelectorAll('.btnOperator').forEach(item => {
+operators.forEach(item => {
     item.addEventListener('click', event => {
-        const operatorDisplay = document.getElementById('operatorDisplay');
         operatorDisplay.textContent = item.value;
-        const historyDisplay = document.getElementById('historyDisplay');
         historyDisplay.textContent = liveDisplay.textContent;
         clearLiveDisplay();
     })
 })
 
-document.getElementById('btnEqual').addEventListener('click', event => {
-    const operatorDisplay = document.getElementById('operatorDisplay');
+equal.addEventListener('click', event => {
+    if (operatorDisplay.textContent === "=") {
+        return;
+    }
     const operator = operatorDisplay.textContent;
-    console.log(operator)
-    const historyDisplay = document.getElementById('historyDisplay');
     const num1 = parseInt(historyDisplay.textContent);
-    const liveDisplay = document.getElementById('liveDisplay');
     const num2 = parseInt(liveDisplay.textContent);
     const result = operate(operator, num1, num2)
     console.log(result);
     clearHistoryDisplay();
-    historyDisplay.textContent = `${num1} ${operator} ${num2}`
-    liveDisplay.textContent = `${result}`
+    clearOperatordisplay();
+    operatorDisplay.textContent = equal.value;
+    historyDisplay.textContent = `${num1} ${operator} ${num2}`;
+    liveDisplay.textContent = `${result}`;
 });
 
 // save which operation has been chosen
@@ -31,17 +37,20 @@ document.getElementById('btnEqual').addEventListener('click', event => {
 
 // function to clear the content of liveDisplay
 function clearLiveDisplay() {
-    document.getElementById('liveDisplay').textContent = '';
+    liveDisplay.textContent = "";
 }
 
 function clearHistoryDisplay() {
-    document.getElementById('historyDisplay').textContent = '';
+    historyDisplay.textContent = "";
+}
+
+function clearOperatordisplay() {
+    operatorDisplay.textContent = "";
 }
 
 // // function to populate display
-document.querySelectorAll('.btnNum').forEach(item => {
+numbers.forEach(item => {
     item.addEventListener('click', event => {
-        const liveDisplay = document.getElementById('liveDisplay');
         liveDisplay.textContent += item.value;
     });
 });
