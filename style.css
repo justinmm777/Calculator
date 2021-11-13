@@ -24,92 +24,20 @@ html {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: flex-end;
+    font-size: 35px;
     height: 100px;
-    padding: 5px;
+    padding: 1px 10px;
     border-radius: 10px;
     background: #e0e0e0;
     box-shadow: inset 5px 5px 10px #5a5a5a,
                 inset -5px -5px 10px #ffffff;
 }
 
-#historyOperatorDiv {
-    display: flex;
-    justify-content: end;
-}
-
-#historyDisplay {
-    display: flex;
-    border: 1px solid red;
-    width: 100%;
-}
-
-#operatorDisplay {
-    border: 1px solid blue;
-    width: 21px;
-    height: 30px;
-}
-
-#liveDisplay {
-    border: 1px solid green;
-    height: 30px;
-}
-
-
-#historyDisplay,
-#operatorDisplay,
-#liveDisplay {
-    display: flex;
-    justify-content: right;
-    margin: 3px;
-    font-size: 25px;
-    overflow: hidden;
-}
-
 .displayRow {
     display: flex;
 }
 
-.btnClearDelete {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 6px;
-    background: linear-gradient(145deg, #cacaca, #f0f0f0);
-    box-shadow:  9px 9px 12px #898989,
-                -9px -9px 12px #ffffff;
-}
-
-#btnClear,
-#btnDelete {
-    padding: 10px 25px;
-    font-size: 25px;
-    border: none;
-}
-
-#btnClear {
-    border-radius: 32px;
-    background: #dd1d1d;
-}
-
-#btnClear:active {
-    border-radius: 50px;
-    background: #dd1d1d;
-    box-shadow: inset 34px 34px 68px #961414,
-                inset -34px -34px 68px #ff2626;
-}
-
-#btnDelete {
-    border-radius: 32px;
-    background: #73d216;
-}
-
-#btnDelete:active {
-    border-radius: 50px;
-    background: #73d216;
-    box-shadow: inset 22px 22px 44px #62b313,
-                inset -22px -22px 44px #84f219;
-}
 
 .btnNumSymbols {
     display: flex;
@@ -128,9 +56,8 @@ html {
     gap:10px;
 }
 
-.btnOperator,
-.btnEqual,
-.btnNum {
+
+button {
     font-size: 25px;
     height: 70px;
     width: 70px;
@@ -141,9 +68,49 @@ html {
     border: none;
 }
 
-.btnNum:active,
-.btnOperator:active {
+button:active {
     box-shadow: 16px 16px 18px #aaaaaa inset,
                 -16px -16px 18px #ffffff inset;
 }
+
+
+.btnClearDelete {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 6px;
+    background: linear-gradient(145deg, #cacaca, #f0f0f0);
+    box-shadow:  9px 9px 12px #898989,
+                -9px -9px 12px #ffffff;
+}
+
+#btnClear,
+#btnDelete {
+    font-size: 25px;
+    border: none;
+}
+
+#btnClear {
+    background: #dd1d1d;
+}
+
+#btnClear:active {
+    border-radius: 50px;
+    background: #dd1d1d;
+    box-shadow: inset 34px 34px 68px #961414,
+                inset -34px -34px 68px #ff2626;
+}
+
+#btnDelete {
+    background: #73d216;
+}
+
+#btnDelete:active {
+    border-radius: 50px;
+    background: #73d216;
+    box-shadow: inset 22px 22px 44px #62b313,
+                inset -22px -22px 44px #84f219;
+}
+
 
