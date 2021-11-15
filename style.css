@@ -1,30 +1,29 @@
 html {
     height: 100vh;
-    box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
     background: #e0e0e0;
 }
 
-#container {
+.calcContainer {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     width: 350px;
-    height: 540px;
-    padding: 10px;
+    height: 550px;
     border-radius: 12px;
+    padding: 10px;
+    flex-wrap: wrap;
     background: linear-gradient(145deg, #f0f0f0, #cacaca);
     box-shadow:  9px 9px 12px #898989,
                 -9px -9px 12px #ffffff;
 }
 
-#calcDisplay {
+.calcDisplay {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;
+    justify-content: flex-end;
+    align-items: center;
     font-size: 35px;
     height: 100px;
     padding: 1px 10px;
@@ -34,28 +33,19 @@ html {
                 inset -5px -5px 10px #ffffff;
 }
 
-.displayRow {
-    display: flex;
-}
-
-
-.btnNumSymbols {
-    display: flex;
-    flex-direction: column;
+.calcBtnBox {
+    display: flex;   
     justify-content: space-around;
+    border: 0.5px ligth #bebebe;
     padding: 10px;
     gap: 10px;
-    border-radius: 6px;
-    background: linear-gradient(145deg, #f0f0f0, #cacaca);
-    box-shadow:  9px 9px 12px #898989,
-                -9px -9px 12px #ffffff;
+    flex-wrap: wrap;
+    border-radius: 8px;
+background: #e0e0e0;
+box-shadow:  12px 12px 24px #bebebe,
+             -12px -12px 24px #ffffff;
+    
 }
-
-.btnRow {
-    display: flex;
-    gap:10px;
-}
-
 
 button {
     font-size: 25px;
@@ -71,18 +61,6 @@ button {
 button:active {
     box-shadow: 16px 16px 18px #aaaaaa inset,
                 -16px -16px 18px #ffffff inset;
-}
-
-
-.btnClearDelete {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 6px;
-    background: linear-gradient(145deg, #cacaca, #f0f0f0);
-    box-shadow:  9px 9px 12px #898989,
-                -9px -9px 12px #ffffff;
 }
 
 #btnClear,
@@ -112,5 +90,11 @@ button:active {
     box-shadow: inset 22px 22px 44px #62b313,
                 inset -22px -22px 44px #84f219;
 }
+
+.isDepressed {
+    box-shadow: 16px 16px 18px #ebc8c8 inset,
+                -16px -16px 18px #ebc9c9 inset;
+}
+
 
 
