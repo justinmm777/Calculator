@@ -1,46 +1,56 @@
 const container = document.querySelector('.calcContainer');
-const btns = document.querySelector('.calcBtnBox');
+const btns = container.querySelector('.calcBtnBox');
 const display = document.querySelector('.calcDisplay');
-console.log(display)
 
 
 // functions that populate the display
-
-
 // store the first number that is input 
 // into the calculator when a user presses an operator
+
+// const getBtnType = btn => {
+//     const {action} = btn.dataset
+//     if (!action) return 
+// }
 btns.addEventListener('click', e => {
     if (e.target.matches('button')) {
-        const btn = e.target;
-        const action = btn.dataset.action;
-        const btnContent = btn.textContent;
-        const displayedNum = display.textContent;
-        const previousBtnType = container.dataset.previousBtnType;
-        console.log(displayedNum)
+        const btn = e.target
+        const action = btn.dataset.action
+        const btnContent = btn.textContent
+        const displayedNum = display.textContent
+        const previousKeyType = container.dataset.previousKeyType
+    
+        
+        
 
         Array.from(btn.parentNode.children)
         .forEach(b => b.classList.remove('isDepressed'));
 
-
+        
 
         if (!action) {
-            if (displayedNum === '0' || previousBtnType === 'operator') {
+            if (displayedNum === '0' || previousKeyType === 'operator') {
                 display.textContent = btnContent;
             } else {
-                display.textContent = displayedNum + btnContent;
+                display.textContent = displayedNum + btnContent
             }
-            console.log('numKey!');
         }
+
+        
         if (
             action === 'add' ||
             action === 'subtract' ||
             action === 'multiply' ||
             action === 'divide'
         ) {
-            btn.classList.add('isDepressed');
-            container.dataset.previousBtnType = 'operator';
+            btn.classList.add('isDepressed')
+            container.dataset.previousKeyType = 'operator'
+            container.dataset.num1 = displayedNum
+            container.dataset.operator = action
             console.log(action);
+        } else {
+            container.dataset.previousKeyType = 'number'
         }
+        
         if (action === 'decimal') {
             display.textContent = displayedNum + '.';
             console.log('decimal');
@@ -52,10 +62,14 @@ btns.addEventListener('click', e => {
             console.log('delete');
         }
         if (action === 'equal') {
+            const num1 = container.dataset.num1
+            const operator = container.dataset.operator
+            const num2 = displayedNum
+
+            display.textContent = calculate(num1, operator, num2)
             console.log('equal');
         }
     }
-    
 })
 
 
@@ -68,35 +82,17 @@ btns.addEventListener('click', e => {
 
 
 // Operater function
-function operate(a, operator, b) {
-    if (operator == "+") {
-        return add(a, b);
-    } else if (operator == "-") {
-        return subtract(a, b);
-    } else if (operator == "*") {
-        return multiply(a, b);
-    } else if (operator == "/") {
-        return divide(a, b);
+function calculate(num1, operator, num2) {
+    let result = "";
+
+    if (operator === "add") {
+        result = parseFloat(num1) + parseFloat(num2)
+    } else if (operator === "subtract") {
+        result = parseFloat(num1) - parseFloat(num2)
+    } else if (operator == "multiply") {
+        result = parseFloat(num1) * parseFloat(num2)
+    } else if (operator == "divide") {
+        result = parseFloat(num1) / parseFloat(num2)
     }
-}
-
-
-// functions for all of the basic math operators
-function add(a, b) {
-    return a + b;
-}
-
-function subtract(a, b) {
-    return a - b;
-}
-
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    if (b === 0) {
-        return "Cannot divide by Zero!"
-    }
-    return a / b;
+    return result
 }
