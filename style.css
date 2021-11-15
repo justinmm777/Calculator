@@ -22,9 +22,10 @@ html {
 
 .calcDisplay {
     display: flex;
+    width: 325px;
     justify-content: flex-end;
     align-items: center;
-    font-size: 35px;
+    font-size: 32px;
     height: 100px;
     padding: 1px 10px;
     border-radius: 10px;

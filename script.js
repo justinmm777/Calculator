@@ -28,11 +28,17 @@ btns.addEventListener('click', e => {
         
 
         if (!action) {
-            if (displayedNum === '0' || previousKeyType === 'operator') {
+            if (
+                displayedNum === '0' || 
+                previousKeyType === 'operator' ||
+                previousKeyType === 'equal'
+                ) {
                 display.textContent = btnContent;
             } else {
                 display.textContent = displayedNum + btnContent
             }
+
+            container.dataset.previousKeyType = 'number'
         }
 
         
@@ -42,32 +48,82 @@ btns.addEventListener('click', e => {
             action === 'multiply' ||
             action === 'divide'
         ) {
-            btn.classList.add('isDepressed')
+            const num1 = container.dataset.num1
+            const operator = container.dataset.operator
+            const num2 = displayedNum
+
+            if (num1 && 
+                operator && 
+                previousKeyType !== 'operator' &&
+                previousKeyType !== 'equal'
+                ) {
+                const calcValue = calculate(num1, operator, num2)
+                display.textContent = calcValue
+                container.dataset.num1 = calcValue
+            } else {
+                container.dataset.num1 = displayedNum
+            }
+
+        btn.classList.add('isDepressed')
             container.dataset.previousKeyType = 'operator'
             container.dataset.num1 = displayedNum
             container.dataset.operator = action
-            console.log(action);
-        } else {
-            container.dataset.previousKeyType = 'number'
-        }
-        
+        } 
+
         if (action === 'decimal') {
-            display.textContent = displayedNum + '.';
-            console.log('decimal');
+            if (!displayedNum.includes('.')) {
+                display.textContent = displayedNum + '.';
+            } else if (
+                previousKeyType === 'operator' ||
+                previousKeyType === 'equal'
+            ) {
+                display.textContent = '0.';
+            }
+
+            container.dataset.previousKeyType = 'decimal'
         }
+
         if (action === 'clear') {
-            console.log('clear');
+            if (btn.textContent === 'AC') {
+                container.dataset.num1 = "";
+                container.dataset.modValue = "";
+                container.dataset.operator = "";
+                container.dataset.previousKeyType = "";
+            } else {
+                btn.textContent = 'AC'
+            }
+
+
+            display.textContent = '0'
+            container.dataset.previousKeyType = 'clear'
         }
+
+        if (action !== 'clear') {
+            const btnClear = container.querySelector('[data-action=clear]')
+            btnClear.textContent = 'CE'
+        }
+
         if (action === 'delete') {
+            container.dataset.previousKeyType = 'delete'
             console.log('delete');
         }
+
         if (action === 'equal') {
             const num1 = container.dataset.num1
             const operator = container.dataset.operator
             const num2 = displayedNum
 
+            if(num1) {
+                if (previousKeyType === 'equal') {
+                    num1 = displayedNum
+                    secondValue = container.dataset.modValue
+                }
+
             display.textContent = calculate(num1, operator, num2)
-            console.log('equal');
+            }
+
+            container.dataset.modValue = num2;
+            container.dataset.previousKeyType = 'equal'
         }
     }
 })
