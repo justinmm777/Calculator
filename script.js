@@ -24,19 +24,24 @@ btns.addEventListener('click', e => {
 
         
 // save which operation has been chosen
-        if (!action) {
-            if (
-                displayedNum === '0' || 
+        const createDisplayString = () => {
+            // Variables required are:
+            // 1. btnContent
+            // 2. displayedNum
+            // 3. previousKeyType
+            // 4. action
+
+            if (!action) {
+                return displayedNum === '0' || 
                 previousKeyType === 'operator' ||
                 previousKeyType === 'equal'
-                ) {
-                display.textContent = btnContent;
-            } else {
-                display.textContent = displayedNum + btnContent
+                ? btnContent
+                :displayedNum + btnContent
+                }
+                container.dataset.previousKeyType = 'number'
             }
-
-            container.dataset.previousKeyType = 'number'
         }
+        
 
         
         if (
