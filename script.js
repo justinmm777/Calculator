@@ -19,14 +19,11 @@ btns.addEventListener('click', e => {
         const displayedNum = display.textContent
         const previousKeyType = container.dataset.previousKeyType
     
-        
-        
-
         Array.from(btn.parentNode.children)
         .forEach(b => b.classList.remove('isDepressed'));
 
         
-
+// save which operation has been chosen
         if (!action) {
             if (
                 displayedNum === '0' || 
@@ -83,6 +80,7 @@ btns.addEventListener('click', e => {
             container.dataset.previousKeyType = 'decimal'
         }
 
+// function to clear the content of liveDisplay
         if (action === 'clear') {
             if (btn.textContent === 'AC') {
                 container.dataset.num1 = "";
@@ -92,7 +90,6 @@ btns.addEventListener('click', e => {
             } else {
                 btn.textContent = 'AC'
             }
-
 
             display.textContent = '0'
             container.dataset.previousKeyType = 'clear'
@@ -107,7 +104,7 @@ btns.addEventListener('click', e => {
             container.dataset.previousKeyType = 'delete'
             console.log('delete');
         }
-
+// then operate() on them when the user presses the “=” key.
         if (action === 'equal') {
             const num1 = container.dataset.num1
             const operator = container.dataset.operator
@@ -116,7 +113,7 @@ btns.addEventListener('click', e => {
             if(num1) {
                 if (previousKeyType === 'equal') {
                     num1 = displayedNum
-                    secondValue = container.dataset.modValue
+                    num2= container.dataset.modValue
                 }
 
             display.textContent = calculate(num1, operator, num2)
@@ -129,26 +126,13 @@ btns.addEventListener('click', e => {
 })
 
 
-
-
-// save which operation has been chosen
-// then operate() on them when the user presses the “=” key. 
-
-// function to clear the content of liveDisplay
-
-
 // Operater function
 function calculate(num1, operator, num2) {
-    let result = "";
+    const n1 = parseFloat(num1)
+    const n2 = parseFloat(num2)
 
-    if (operator === "add") {
-        result = parseFloat(num1) + parseFloat(num2)
-    } else if (operator === "subtract") {
-        result = parseFloat(num1) - parseFloat(num2)
-    } else if (operator == "multiply") {
-        result = parseFloat(num1) * parseFloat(num2)
-    } else if (operator == "divide") {
-        result = parseFloat(num1) / parseFloat(num2)
-    }
-    return result
+    if (operator === "add") return n1 + n2
+    if (operator === "subtract") return n1 - n2
+    if (operator === "multiply") return n1 * n2
+    if (operator === "divide") return n1 / n2
 }
