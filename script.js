@@ -37,10 +37,19 @@ btns.addEventListener('click', e => {
                 previousKeyType === 'equal'
                 ? btnContent
                 :displayedNum + btnContent
-                }
-                container.dataset.previousKeyType = 'number'
             }
+                // container.dataset.previousKeyType = 'number'
+
+            if (action === 'decimal') {
+                if (!displayedNum.includes('.')) return displayedNum + '.';
+                if (previousKeyType === 'operator' || previousKeyType === 'equal') return '0.';
+            }
+                // container.dataset.previousKeyType = 'decimal'
         }
+        
+    
+
+
         
 
         
