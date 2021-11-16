@@ -30,6 +30,8 @@ btns.addEventListener('click', e => {
             // 2. displayedNum
             // 3. previousKeyType
             // 4. action
+            // 5. calculator.dataset.firstValue
+            // 6. calculator.dataset.operator
 
             if (!action) {
                 return displayedNum === '0' || 
@@ -38,48 +40,43 @@ btns.addEventListener('click', e => {
                 ? btnContent
                 :displayedNum + btnContent
             }
-                // container.dataset.previousKeyType = 'number'
-
+                
             if (action === 'decimal') {
                 if (!displayedNum.includes('.')) return displayedNum + '.';
                 if (previousKeyType === 'operator' || previousKeyType === 'equal') return '0.';
+                return displayedNum
             }
-                // container.dataset.previousKeyType = 'decimal'
+                
+            if (
+                action === 'add' ||
+                action === 'subtract' ||
+                action === 'multiply' ||
+                action === 'divide'
+            ) {
+                const num1 = container.dataset.num1
+                const operator = container.dataset.operator
+                const num2 = displayedNum
+    
+                return num1 && 
+                    operator && 
+                    previousKeyType !== 'operator' &&
+                    previousKeyType !== 'equal'
+                    ? calculate(num1, operator, displayedNum)
+                    : displayedNum
+
+            btn.classList.add('isDepressed')
+                
+            } 
+
+            
+
+
+
         }
         
     
-
-
         
-
         
-        if (
-            action === 'add' ||
-            action === 'subtract' ||
-            action === 'multiply' ||
-            action === 'divide'
-        ) {
-            const num1 = container.dataset.num1
-            const operator = container.dataset.operator
-            const num2 = displayedNum
-
-            if (num1 && 
-                operator && 
-                previousKeyType !== 'operator' &&
-                previousKeyType !== 'equal'
-                ) {
-                const calcValue = calculate(num1, operator, num2)
-                display.textContent = calcValue
-                container.dataset.num1 = calcValue
-            } else {
-                container.dataset.num1 = displayedNum
-            }
-
-        btn.classList.add('isDepressed')
-            container.dataset.previousKeyType = 'operator'
-            container.dataset.num1 = displayedNum
-            container.dataset.operator = action
-        } 
 
         if (action === 'decimal') {
             if (!displayedNum.includes('.')) {
@@ -94,7 +91,7 @@ btns.addEventListener('click', e => {
             container.dataset.previousKeyType = 'decimal'
         }
 
-// function to clear the content of liveDisplay
+        // function to clear the content of liveDisplay
         if (action === 'clear') {
             if (btn.textContent === 'AC') {
                 container.dataset.num1 = "";
@@ -118,7 +115,7 @@ btns.addEventListener('click', e => {
             container.dataset.previousKeyType = 'delete'
             console.log('delete');
         }
-// then operate() on them when the user presses the “=” key.
+        // then operate() on them when the user presses the “=” key.
         if (action === 'equal') {
             const num1 = container.dataset.num1
             const operator = container.dataset.operator
