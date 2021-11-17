@@ -55,6 +55,12 @@ const createDisplayString = (btn, displayedNum, state) => {
     // function to clear the content of liveDisplay
     if (btnType === 'clear') return 0;
 
+
+    if (action === 'delete') {
+        return displayedNum.slice(0, -1)
+    }
+
+
     // then operate() on them when the user presses the “=” key.
     if (btnType === 'equal') {
         if (previousKeyType === 'equal') {
@@ -65,7 +71,6 @@ const createDisplayString = (btn, displayedNum, state) => {
         }
     }
 }
-
 
 // function that changes the calculator's visual appearance and custom attributes.
 const updateCalcState = (btn, container, calculatedValue, displayedNum) => {
@@ -126,6 +131,7 @@ const pressDepress = (btn, container) => {
         const clearButton = container.querySelector('[data-action=clear]')
         clearButton.textContent = 'CE'
     }
+
 }
 
 // function to find the keytype
@@ -150,5 +156,8 @@ function calculate(num1, operator, num2) {
     if (operator === "add") return n1 + n2
     if (operator === "subtract") return n1 - n2
     if (operator === "multiply") return n1 * n2
-    if (operator === "divide") return n1 / n2
+    if (operator === "divide") {
+        if (n2 === 0) return "Zero Division Error!"
+        return n1 / n2
+    } 
 }

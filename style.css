@@ -49,6 +49,12 @@ html {
     
 }
 
+.clearDeleteBox {
+    display: flex;
+    width: 300px;
+    justify-content: space-around;
+}
+
 button {
     font-size: 25px;
     height: 70px;
