@@ -23,6 +23,7 @@ html {
 .calcDisplay {
     display: flex;
     width: 325px;
+    overflow: hidden;
     justify-content: flex-end;
     align-items: center;
     font-size: 32px;

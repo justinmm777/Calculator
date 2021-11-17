@@ -2,139 +2,144 @@ const container = document.querySelector('.calcContainer');
 const btns = container.querySelector('.calcBtnBox');
 const display = document.querySelector('.calcDisplay');
 
-
 // functions that populate the display
-// store the first number that is input 
-// into the calculator when a user presses an operator
-
-// const getBtnType = btn => {
-//     const {action} = btn.dataset
-//     if (!action) return 
-// }
 btns.addEventListener('click', e => {
-    if (e.target.matches('button')) {
-        const btn = e.target
-        const action = btn.dataset.action
-        const btnContent = btn.textContent
-        const displayedNum = display.textContent
-        const previousKeyType = container.dataset.previousKeyType
-    
-        Array.from(btn.parentNode.children)
-        .forEach(b => b.classList.remove('isDepressed'));
+    if (!e.target.matches('button')) return
+    const btn = e.target
+    const displayedNum = display.textContent
 
-        
+    const displayString = createDisplayString(btn, displayedNum, container.dataset)
+
+    display.textContent = displayString
+
+    updateCalcState(btn, container, displayString, displayedNum)
+    pressDepress(btn, container)
+})
+
+
 // save which operation has been chosen
-        const createDisplayString = () => {
-            // Variables required are:
-            // 1. btnContent
-            // 2. displayedNum
-            // 3. previousKeyType
-            // 4. action
-            // 5. calculator.dataset.firstValue
-            // 6. calculator.dataset.operator
+const createDisplayString = (btn, displayedNum, state) => {
+    const btnContent = btn.textContent
+    const previousKeyType = state.previousKeyType
+    const action = btn.dataset.action
+    const num1 = state.num1
+    const operator = state.operator
+    const modValue = state.modValue
+    const btnType = getBtnType(btn)
 
-            if (!action) {
-                return displayedNum === '0' || 
-                previousKeyType === 'operator' ||
-                previousKeyType === 'equal'
-                ? btnContent
-                :displayedNum + btnContent
-            }
-                
-            if (action === 'decimal') {
-                if (!displayedNum.includes('.')) return displayedNum + '.';
-                if (previousKeyType === 'operator' || previousKeyType === 'equal') return '0.';
-                return displayedNum
-            }
-                
-            if (
-                action === 'add' ||
-                action === 'subtract' ||
-                action === 'multiply' ||
-                action === 'divide'
-            ) {
-                const num1 = container.dataset.num1
-                const operator = container.dataset.operator
-                const num2 = displayedNum
+    if (btnType === 'number') {
+        return displayedNum === '0' || 
+        previousKeyType === 'operator' ||
+        previousKeyType === 'equal'
+        ? btnContent
+        :displayedNum + btnContent
+    }
+        
+    if (btnType === 'decimal') {
+        if (!displayedNum.includes('.')) return displayedNum + '.';
+        if (previousKeyType === 'operator' || previousKeyType === 'equal') return '0.';
+        return displayedNum
+    }
+
+    // store the first number that is input 
+    // into the calculator when a user presses an operator  
+    if (btnType === 'operator') {
+        return num1 && 
+            operator && 
+            previousKeyType !== 'operator' &&
+            previousKeyType !== 'equal'
+            ? calculate(num1, operator, displayedNum)
+            : displayedNum  
+    } 
     
-                return num1 && 
-                    operator && 
-                    previousKeyType !== 'operator' &&
-                    previousKeyType !== 'equal'
-                    ? calculate(num1, operator, displayedNum)
-                    : displayedNum
+    // function to clear the content of liveDisplay
+    if (btnType === 'clear') return 0;
 
-            btn.classList.add('isDepressed')
-                
-            } 
-
-            
-
-
-
+    // then operate() on them when the user presses the “=” key.
+    if (btnType === 'equal') {
+        if (previousKeyType === 'equal') {
+            return displayedNum
         }
-        
-    
-        
-        
-
-        if (action === 'decimal') {
-            if (!displayedNum.includes('.')) {
-                display.textContent = displayedNum + '.';
-            } else if (
-                previousKeyType === 'operator' ||
-                previousKeyType === 'equal'
-            ) {
-                display.textContent = '0.';
-            }
-
-            container.dataset.previousKeyType = 'decimal'
-        }
-
-        // function to clear the content of liveDisplay
-        if (action === 'clear') {
-            if (btn.textContent === 'AC') {
-                container.dataset.num1 = "";
-                container.dataset.modValue = "";
-                container.dataset.operator = "";
-                container.dataset.previousKeyType = "";
-            } else {
-                btn.textContent = 'AC'
-            }
-
-            display.textContent = '0'
-            container.dataset.previousKeyType = 'clear'
-        }
-
-        if (action !== 'clear') {
-            const btnClear = container.querySelector('[data-action=clear]')
-            btnClear.textContent = 'CE'
-        }
-
-        if (action === 'delete') {
-            container.dataset.previousKeyType = 'delete'
-            console.log('delete');
-        }
-        // then operate() on them when the user presses the “=” key.
-        if (action === 'equal') {
-            const num1 = container.dataset.num1
-            const operator = container.dataset.operator
-            const num2 = displayedNum
-
-            if(num1) {
-                if (previousKeyType === 'equal') {
-                    num1 = displayedNum
-                    num2= container.dataset.modValue
-                }
-
-            display.textContent = calculate(num1, operator, num2)
-            }
-
-            container.dataset.modValue = num2;
-            container.dataset.previousKeyType = 'equal'
+        if (previousKeyType !== 'equal') {
+            return calculate(num1, operator, displayedNum)
         }
     }
-})
+}
+
+
+// function that changes the calculator's visual appearance and custom attributes.
+const updateCalcState = (btn, container, calculatedValue, displayedNum) => {
+    const btnType = getBtnType(btn)
+    const {
+        num1,
+        operator,
+        modValue,
+        previousKeyType
+    } = container.dataset
+    container.dataset.previousKeyType = btnType
+
+    if (btnType === 'operator') {
+        btn.classList.add('isDepressed')
+        container.dataset.operator = btn.dataset.action
+        container.dataset.num1 = num1 &&
+            operator &&
+            previousKeyType !== 'operator' &&
+            previousKeyType !== 'equal'
+            ? calculatedValue
+            : displayedNum
+    }
+
+    if (btnType === 'clear') {
+        if (btn.textContent === 'AC') {
+            container.dataset.num1 = "";
+            container.dataset.modValue = "";
+            container.dataset.operator = "";
+            container.dataset.previousKeyType = "";
+        } else {
+            btn.textContent = 'AC'
+        }
+    }
+    if (btnType !== 'clear') {
+        const clearButton = container.querySelector('[data-action=clear]')
+        clearButton.textContent = 'CE'
+    }
+
+    if(btnType === 'equal') {
+        container.dataset.modValue = num1 && previousKeyType === 'equal'
+        ? modValue
+        : displayedNum
+    }
+}
+
+// function for pressing / depressing operators
+const pressDepress = (btn, container) => {
+    const btnType = getBtnType(btn)
+    Array.from(btn.parentNode.children).forEach(b => b.classList.remove('isDepressed'))
+
+    if (btnType === 'operator') btn.classList.add('isDepressed')
+
+    if (btnType === 'clear' && btn.textContent !== 'AC') {
+        btn.textContent = 'AC'
+    }
+
+    if (btnType !== 'clear') {
+        const clearButton = container.querySelector('[data-action=clear]')
+        clearButton.textContent = 'CE'
+    }
+}
+
+// function to find the keytype
+const getBtnType = (btn) => {
+    const {action} = btn.dataset
+    if (!action) return 'number'
+    if (
+        action === 'add' ||
+        action === 'subtract' ||
+        action === 'multiply' ||
+        action === 'divide'
+    ) return 'operator'
+   return action
+}
 
 
 // Operater function
