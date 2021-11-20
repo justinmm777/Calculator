@@ -16,7 +16,6 @@ btns.addEventListener('click', e => {
     pressDepress(btn, container)
 })
 
-
 // save which operation has been chosen
 const createDisplayString = (btn, displayedNum, state) => {
     const btnContent = btn.textContent
@@ -161,3 +160,55 @@ function calculate(num1, operator, num2) {
         return n1 / n2
     } 
 }
+
+// Keyboard Support
+document.addEventListener("keydown", e => {
+    const key = e.key
+    console.log(key)
+    if (
+        key === "0" ||
+        key === "1" ||
+        key === "2" ||
+        key === "3" ||
+        key === "4" ||
+        key === "5" ||
+        key === "6" ||
+        key === "7" ||
+        key === "8" ||
+        key === "9" ||
+        key === "." ||
+        key === "/" ||
+        key === "*" ||
+        key === "-" ||
+        key === "+" ||
+        key === "=" ||
+        key === "Enter" ||
+        key === "Backspace" ||
+        key === "Delete"
+    ) {
+        btnClick(key)
+    }  
+    
+});
+
+function btnClick(key) {
+    const buttons = document.querySelectorAll('button')
+    const equal = document.querySelector('.btnEqual')
+    const backSpace = document.getElementById('btnDelete')
+    const clear = document.getElementById('btnClear')
+    buttons.forEach(button => {
+        if (button.innerText === key) {
+            button.click();
+        }
+        if (key === "Enter") {
+            equal.click();
+        }
+        if (key === "Backspace") {
+            backSpace.click();
+        }
+        if (key === "Delete") {
+            clear.click()
+        }
+    })
+}
+
